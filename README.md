@@ -38,6 +38,9 @@ Record all keystrokes on the device.
 Store keystrokes in a text file.
 Operate invisibly in the background.
 
+
+This repository is licensed under the MIT License. See the LICENSE file for more details.
+
 Technology
 Backend: Python 3
 
