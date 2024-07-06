@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Encrypt & Decrypt with Caesar cipher and Vigenere cipher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .copy-btn, .reset-btn {
+            margin-top: 10px;
+        }
+        .tooltip-inner {
+            max-width: 100%;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Encrypt & Decrypt with Caesar cipher and Vigenere cipher</h1>
+    <form method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="plain_text">Enter text (for encryption or decryption):</label>
+                <textarea class="form-control" id="plain_text" name="plain_text" rows="5" placeholder="Enter the text here...">{{ plain_text if plain_text else '' }}</textarea>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="encrypted_text">Encrypted/Decrypted Text:</label>
+                <textarea class="form-control" id="encrypted_text" name="encrypted_text" rows="5" readonly>{{ result_text if result_text else '' }}</textarea>
+                <button type="button" class="btn btn-secondary copy-btn" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="bottom" title="Click to copy the encrypted text">Copy</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="caesar_shift">Enter Caesar Shift (integer):</label>
+            <input type="number" class="form-control" id="caesar_shift" name="caesar_shift" value="{{ caesar_shift if caesar_shift else '' }}" placeholder="Enter the Caesar shift value...">
+        </div>
+        <div class="form-group">
+            <label for="vigenere_key">Enter Vigenère Key (string):</label>
+            <input type="text" class="form-control" id="vigenere_key" name="vigenere_key" value="{{ vigenere_key if vigenere_key else '' }}" placeholder="Enter the Vigenère key...">
+        </div>
+        <div class="form-group">
+            <button type="submit" name="action" value="Encrypt" class="btn btn-primary">Encrypt</button>
+            <button type="submit" name="action" value="Decrypt" class="btn btn-secondary">Decrypt</button>
+            <button type="button" class="btn btn-danger reset-btn" onclick="resetForm()">Reset</button>
+        </div>
+        <div class="form-group">
+            <small class="form-text text-muted">
+                Enter the text in the left box. After encryption or decryption, the result will appear in the right box. Use the 'Copy' button to copy the encrypted text. Use the 'Reset' button to clear all fields.
+            </small>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+    function copyToClipboard() {
+        var copyText = document.getElementById("encrypted_text");
+        copyText.select();
+        document.execCommand("copy");
+        $('[data-toggle="tooltip"]').tooltip('hide')
+            .attr('data-original-title', 'Copied!')
+            .tooltip('show');
+    }
+
+    function resetForm() {
+        document.getElementById("plain_text").value = "";
+        document.getElementById("encrypted_text").value = "";
+        document.getElementById("caesar_shift").value = "";
+        document.getElementById("vigenere_key").value = "";
+    }
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+</body>
+</html>
