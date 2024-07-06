@@ -42,26 +42,4 @@ Technology
 Backend: Python 3
 
 
-To run these tools locally, follow these steps:
-Clone the repository.
-Set up a virtual environment and install dependencies.
-Run the Flask applications.
-For the Password Generator Tool and Text Encryption Tool, navigate to their respective directories and run them.
-The Keylogger can be run directly as a Python script.
 
-Password Generator Tool
-Open your web browser and navigate to http://localhost:5000.
-Adjust the settings for password length and character types.
-Click "Generate" to create a new password.
-Check the password strength indicator for guidance.
-
-Text Encryption Tool
-Open your web browser and navigate to http://localhost:5000.
-Enter the text you want to encrypt or decrypt.
-Select the encryption or decryption method (Caesar or Vigenere cipher).
-Click "Encrypt" or "Decrypt" to process the text.
-
-Keylogger
-Run the keylogger.py script.
-The keylogger will start recording keystrokes in the background.
-To view the recorded keystrokes, open the generated log file.
