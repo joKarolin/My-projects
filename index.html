@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova&display=swap">
+
+    <style>
+        body {
+            font-family: 'Ibarra Real Nova', sans-serif;
+            background-color: #95B46A; /* Use one of the colors as background (light green color) */
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #172815; /* Text color (dark green color) */
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.9); /* White form background with transparency */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3E5622; /* Heading color (green color) */
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #709255; /* Label text color (light green color) */
+        }
+
+        input[type="number"], input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            color: #172815; /* Input text color (dark green color) */
+        }
+
+        input[type="number"]:focus, input[type="text"]:focus {
+            border-color: #3E5622; /* Border color on focus (green color) */
+        }
+
+        button {
+            background: #709255; /* Button background color (light green color) */
+            color: #3E5622; /* Button text color (green color) */
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #567845; /* Darker green hover color */
+        }
+
+        .strength {
+            display: inline-block;
+            padding: 5px;
+            margin-top: 10px;
+        }
+        .strength.weak {
+            color: red;
+        }
+        .strength.medium {
+            color: #FF6700;
+        }
+        .strength.strong {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <form action="/generate_password" method="post" id="passwordForm">
+        <h1>Password Generator</h1>
+        <label for="min_length">How long should it be?</label>
+        <input type="number" name="min_length" id="min_length" required>
+        
+        <label for="has_number">Include numbers? (y/n)</label>
+        <input type="text" name="has_number" id="has_number" maxlength="1" pattern="[ynYN]" required>
+
+        <label for="has_special">Include special characters? (y/n)</label>
+        <input type="text" name="has_special" id="has_special" maxlength="1" pattern="[ynYN]" required>
+
+        <button type="submit">Generate Special Password</button>
+    </form>
+    <div id="strengthIndicator" class="strength"></div>
+
+    <script>
+        document.getElementById('passwordForm').addEventListener('input', function () {
+            const length = document.getElementById('min_length').value;
+            const hasNumber = document.getElementById('has_number').value.toLowerCase() === 'y';
+            const hasSpecial = document.getElementById('has_special').value.toLowerCase() === 'y';
+
+            let strength = 'Weak';
+            if (length >= 12 && hasNumber && hasSpecial) {
+                strength = 'Strong';
+            } else if (length >= 8 && (hasNumber || hasSpecial)) {
+                strength = 'Medium';
+            }
+
+            const strengthIndicator = document.getElementById('strengthIndicator');
+            strengthIndicator.textContent = 'Strength: ' + strength;
+            strengthIndicator.className = 'strength ' + strength.toLowerCase();
+        });
+    </script>
+</body>
+</html>
